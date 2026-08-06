@@ -19,7 +19,7 @@ public:
 
         vector<int> pre(n);
         vector<int> suf(n);
-        vector<int> ans(n);
+        
         // PREFIX ARRAY
         int p=nums[0];
         pre[0]=1;
@@ -36,8 +36,8 @@ public:
         }
         //ANS ARRAY
         for(int i=0;i<n;i++){
-            ans[i]=pre[i]*suf[i];
+            pre[i]=pre[i]*suf[i];
         }
-        return ans;
+        return pre;
     }
 };
