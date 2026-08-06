@@ -12,6 +12,6 @@ public:
             if(curr%t==0 && tem>=t ) return tem;
             else tem++;
         }
-        return 22;
+        return 1;
     }
 };
