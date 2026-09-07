@@ -11,8 +11,6 @@
 class Solution {
 public:
     ListNode* merge(ListNode* a,ListNode* b){
-        ListNode* tempA=a;
-        ListNode* tempB=b;
         ListNode* C= new ListNode(100);
         ListNode* tempC= C;
         while(a!=NULL && b!=NULL){
@@ -34,10 +32,10 @@ public:
     ListNode* mergeKLists(vector<ListNode*>& arr) {
         if(arr.size()==0) return NULL;
         while(arr.size()>1){
-            ListNode* a=arr[arr.size()-1];
-            arr.pop_back();
-            ListNode* b=arr[arr.size()-1];
-            arr.pop_back();   
+            ListNode* a=arr[0];
+            arr.erase(arr.begin());
+            ListNode* b=arr[0];
+            arr.erase(arr.begin());
             ListNode* C=merge(a,b);
             arr.push_back(C);
         }
