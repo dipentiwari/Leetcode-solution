@@ -22,22 +22,19 @@ public:
 
     }
     bool isPalindrome(ListNode* head) {
-        ListNode* c=new ListNode(10);
-        ListNode* temp=head;
-        ListNode* tempc=c;
-        while(temp){
-            ListNode* node=new ListNode(temp->val);
-            tempc->next=node;
-            temp=temp->next;
-            tempc=tempc->next;
-        }   
-        c=c->next;
-        c=reverseList(c);
+        ListNode* slow=head;
+        ListNode* fast=head;
+        while(fast->next!=NULL && fast->next->next!=NULL){
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        ListNode* newhead=reverseList(slow->next);
         ListNode* a=head;
-        while(a){
-            if(a->val!=c->val) return false;
+        ListNode* b=newhead;
+        while(b){
+            if(a->val!=b->val) return false;
             a=a->next;
-            c=c->next;
+            b=b->next;
         }
         return true;
 
