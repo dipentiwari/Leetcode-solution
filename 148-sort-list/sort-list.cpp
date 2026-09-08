@@ -19,8 +19,6 @@ public:
             if(b==NULL) tempC->next=a;
             return C->next;
     }
-
-
     ListNode* sortList(ListNode* head) {
         if(head==NULL || head->next==NULL) return head;
         ListNode* slow=head;
