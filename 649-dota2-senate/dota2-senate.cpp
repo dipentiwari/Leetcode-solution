@@ -11,7 +11,7 @@ public:
             if(s[i]=='R') r.push(i);
             else d.push(i);
         }
-        while(q.size()>1){
+        while(q.size()>0){
             if(s[q.front()]=='X') q.pop();
             
             else if(s[q.front()]=='R'){
@@ -43,8 +43,7 @@ public:
 
             }
         }
-            if(s[q.front()]=='R') return "Radiant";
-            else return "Dire";
+        return "Dire";
         
 
     }
