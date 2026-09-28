@@ -1,37 +1,36 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
 class Solution {
 public:
-    vector<int> rightSideView(TreeNode* root) {
-        vector<int> v;
-        if(root==NULL) return v;
-        queue<TreeNode*> q;
-        q.push(root);
-        int maxleft=0;
-        while(q.size()>0){
-            int n=q.size();
-            int rightmost=0;
-            for(int i=0;i<n;i++){
-                TreeNode* node=q.front();
-                q.pop();
-                if(i==n-1)
-                rightmost=node->val;
-                if(node->left!=NULL) q.push(node->left);
-                if(node->right!=NULL) q.push(node->right);
-            }
-            maxleft=rightmost;
-            v.push_back(maxleft);
-        }
-        return v;
+    int levels(TreeNode* root){
+        if(root==NULL) return 0;
+        return 1+ max(levels(root->left),levels(root->right));
     }
-    
+    // void nthLevel(TreeNode* root,int curr,int value,vector<int> &ans){
+    //     if(root==NULL) return;
+    //     if(curr==value){
+    //         ans[curr]=root->val;
+    //         return;
+    //     }
+    //     nthLevel(root->left,curr+1,value,ans);
+    //     nthLevel(root->right,curr+1,value,ans);
+    // }
+    // void levelOrder(TreeNode* root,vector<int> &ans){
+    //     int n=ans.size();
+    //     for(int i=0;i<n;i++){
+    //         nthLevel(root,0,i,ans);
+    //     }
+    // }
+
+
+    //solving using preorder
+    void preorder(TreeNode* root,vector<int> &ans,int level){
+        if(root==NULL) return;
+        ans[level]=root->val;
+        preorder(root->left,ans,level+1);
+        preorder(root->right,ans,level+1);
+    }
+    vector<int> rightSideView(TreeNode* root) {
+        vector<int> ans(levels(root),0);
+        preorder(root,ans,0);
+        return ans;
+    }
 };
