@@ -29,6 +29,7 @@ public:
 
         for(auto ele:h1){
             int key=ele.first;
+            int freq=ele.second;
             if(h2.find(key)==h2.end()) return false;
             if(h2[key]!=h1[key]) return false;
         }
