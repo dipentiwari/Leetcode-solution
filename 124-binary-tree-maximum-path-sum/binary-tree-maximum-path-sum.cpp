@@ -13,7 +13,7 @@ class Solution {
 public:
     int mx=INT_MIN;
     int fun(TreeNode* root){
-         if(root==NULL) return 0;
+        if(root==NULL) return 0;
         int left=max(fun(root->left),0);
         int right=max(fun(root->right),0);
         int total=root->val+left+right;
