@@ -1,24 +1,26 @@
 class Solution {
 public:
-    int solve(int i,vector<int> &coins,int amount,vector<vector<int>> &dp){
-        if(i==0){
-            if(amount%coins[0]==0) return dp[0][amount]= amount/coins[0];
-            else return dp[0][amount] = 100000;
-        }
-        if(dp[i][amount]!=-1) return dp[i][amount];
-        int nt=solve(i-1,coins,amount,dp);
-        int take=INT_MAX;
-        if(coins[i]<=amount){
-            take=1+solve(i,coins,amount-coins[i],dp);
-        }
-        return dp[i][amount]=min(take,nt);
-        
-    }
+
     int coinChange(vector<int>& coins, int amount) {
         int n=coins.size();
-        vector<vector<int>> dp(n,vector<int> (amount+1,-1));
-        long x=solve(n-1,coins,amount,dp);
-        if(x==100000) return -1;
-        else return x;
+        vector<vector<int>> dp(n,vector<int> (amount+1));
+        for(int i=0;i<n;i++){
+            for(int j=0;j<amount+1;j++){
+                if(i==0){
+                    if(j%coins[0]==0) dp[i][j]=j/coins[0];
+                    else dp[i][j]=100000;
+                }
+                else{
+                    int nt=0+dp[i-1][j];
+                    int take=100000;
+                    if(coins[i]<=j)
+                    take=1+dp[i][j-coins[i]];
+                    dp[i][j]=min(take,nt);
+                }
+            }
+        }
+        if(dp[n-1][amount]==100000) return -1;
+        else 
+        return dp[n-1][amount];
     }
 };
